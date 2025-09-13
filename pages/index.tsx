@@ -5,15 +5,19 @@ import GlbWatcher from '@/components/GlbWatcher'
 import { useQuery } from '@tanstack/react-query'
 
 const Cube = () => {
-  const { scene } = useGLTF('./cube.glb')
-  useQuery({ queryKey: ['./cube.glb'], queryFn: () => null })
+  const path = './cube.glb'
+  const { scene } = useGLTF(path)
+  useQuery({ queryKey: [path], queryFn: () => null })
+  console.log('Cube rendered')
 
   return <primitive object={scene} />
 }
 
 const Plane = () => {
-  const { scene } = useGLTF('./plane.glb')
-  useQuery({ queryKey: ['./plane.glb'], queryFn: () => null })
+  const path = './plane.glb'
+  const { scene } = useGLTF(path)
+  useQuery({ queryKey: [path], queryFn: () => null })
+  console.log('Plane rendered')
 
   return <primitive object={scene} />
 }

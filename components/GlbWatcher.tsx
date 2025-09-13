@@ -3,15 +3,15 @@ import { useGLTF } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
 
 const GlbWatcher = () => {
-  const hasConnected = useRef(false)
+  const connected = useRef(false)
 
   useEffect(() => {
     // Only run in development mode
     if (process.env.NODE_ENV === 'production') return
 
     // Prevent double connection in React strict mode
-    if (hasConnected.current) return
-    hasConnected.current = true
+    if (connected.current) return
+    connected.current = true
 
     const ws = new WebSocket('ws://localhost:8080')
 
@@ -19,6 +19,8 @@ const GlbWatcher = () => {
       const key = `./${event.data}`
       console.log('🔄 GLB file changed:', key)
       useGLTF.clear(key)
+      // const timestamp = Date.now().toString()
+      // glbWatcherClient.setQueryData([key], timestamp)
       glbWatcherClient.resetQueries({ queryKey: [key] })
     }
 

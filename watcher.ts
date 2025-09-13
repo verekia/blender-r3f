@@ -38,7 +38,7 @@ const watchBlends = async () => {
       const timeout = setTimeout(async () => {
         await $`${BLENDER_BIN_PATH} --background --python export_blend_objects.py -- ${blendPath}`.nothrow()
         debounceMap.delete(filename)
-      }, 500)
+      }, 300)
 
       debounceMap.set(filename, timeout)
     }
