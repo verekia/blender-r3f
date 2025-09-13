@@ -1,9 +1,8 @@
 import type { AppProps } from 'next/app'
 
 import '@/global.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const glbWatcherClient = new QueryClient()
+import { QueryClientProvider } from '@tanstack/react-query'
+import { glbWatcherClient } from '@/lib/react-query'
 
 const App = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={glbWatcherClient}>

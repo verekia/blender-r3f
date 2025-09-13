@@ -21,6 +21,7 @@ const server = Bun.serve({
 // Saving causes the file to be modified twice, so we debounce events.
 const debounceMap = new Map<string, ReturnType<typeof setTimeout>>()
 
+// Note: .blend files can't use similar MD5 checks because they change at every save.
 const glbHashMap = new Map<string, string>()
 
 const watchBlends = async () => {

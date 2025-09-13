@@ -1,18 +1,19 @@
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { useGLTF } from '../hooks/useGLTF'
+import { useGLTF } from '@react-three/drei'
 import GlbWatcher from '@/components/GlbWatcher'
+import { useQuery } from '@tanstack/react-query'
 
 const Cube = () => {
   const { scene } = useGLTF('./cube.glb')
-  console.log('🧊 Cube component rendered at:', new Date().toLocaleTimeString())
+  useQuery({ queryKey: ['./cube.glb'], queryFn: () => null })
 
   return <primitive object={scene} />
 }
 
 const Plane = () => {
   const { scene } = useGLTF('./plane.glb')
-  console.log('✈️ Plane component rendered at:', new Date().toLocaleTimeString())
+  useQuery({ queryKey: ['./plane.glb'], queryFn: () => null })
 
   return <primitive object={scene} />
 }
