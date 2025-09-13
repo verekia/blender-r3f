@@ -1,7 +1,14 @@
-import type { AppProps } from "next/app"
+import type { AppProps } from 'next/app'
 
-import "@/global.css"
+import '@/global.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-const App = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />
+const glbWatcherClient = new QueryClient()
+
+const App = ({ Component, pageProps }: AppProps) => (
+  <QueryClientProvider client={glbWatcherClient}>
+    <Component {...pageProps} />
+  </QueryClientProvider>
+)
 
 export default App
