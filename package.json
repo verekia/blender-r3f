@@ -8,14 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-three/fiber": "9.3.0",
+    "@react-three/drei": "10.7.6",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "next": "15.5.3"
+    "next": "15.5.3",
+    "three": "0.180.0"
   },
   "devDependencies": {
-    "typescript": "5.9.2",
     "@types/node": "24.3.3",
     "@types/react": "19.1.13",
-    "@types/react-dom": "19.1.9"
+    "@types/react-dom": "19.1.9",
+    "@types/three": "0.180.0",
+    "three-stdlib": "2.36.0",
+    "typescript": "5.9.2"
   }
 }
