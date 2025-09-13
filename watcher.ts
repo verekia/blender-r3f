@@ -1,6 +1,9 @@
 import { watch } from 'fs/promises'
 import path from 'path'
-import { $ } from 'bun'
+import { $, MD5 } from 'bun'
+import { readFileSync } from 'fs'
+
+const BLENDER_BIN_PATH = process.env.BLENDER_BIN_PATH ?? '/Applications/Blender.app/Contents/MacOS/Blender'
 
 const server = Bun.serve({
   port: process.env.WATCHER_PORT ?? '8080',
@@ -18,6 +21,8 @@ const server = Bun.serve({
 // Saving causes the file to be modified twice, so we debounce events.
 const debounceMap = new Map<string, ReturnType<typeof setTimeout>>()
 
+const glbHashMap = new Map<string, string>()
+
 const watchBlends = async () => {
   for await (const event of watch('./', { recursive: false })) {
     const { filename } = event
@@ -30,7 +35,7 @@ const watchBlends = async () => {
       }
 
       const timeout = setTimeout(async () => {
-        await $`/Applications/Blender.app/Contents/MacOS/Blender --background --python export_blend_objects.py -- ${blendPath}`.nothrow()
+        await $`${BLENDER_BIN_PATH} --background --python export_blend_objects.py -- ${blendPath}`.nothrow()
         debounceMap.delete(filename)
       }, 500)
 
@@ -42,8 +47,12 @@ const watchBlends = async () => {
 const watchGlbs = async () => {
   for await (const event of watch('./public', { recursive: false })) {
     if (event.filename?.endsWith('.glb')) {
+      const glbHash = MD5.hash(readFileSync(path.join('./public', event.filename)))
+      if (glbHashMap.get(event.filename) === glbHash.toString()) continue
+      glbHashMap.set(event.filename, glbHash.toString())
+
       server.publish('glb-changes', event.filename)
-      console.log('📡 📦 Broadcasted glb change: ', event.filename)
+      console.log('📦 📡 GLB change broadcast:', event.filename)
     }
   }
 }
