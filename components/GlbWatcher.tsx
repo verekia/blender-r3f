@@ -1,5 +1,4 @@
-import { glbWatcherClient } from '@/lib/react-query'
-import { useGLTF } from '@react-three/drei'
+import { setGlbVersion } from '@/lib/glb-version-store'
 import { useEffect, useRef } from 'react'
 
 const GlbWatcher = () => {
@@ -18,10 +17,7 @@ const GlbWatcher = () => {
     ws.onmessage = (event) => {
       const key = `./${event.data}`
       console.log('🔄 GLB file changed:', key)
-      useGLTF.clear(key)
-      // const timestamp = Date.now().toString()
-      // glbWatcherClient.setQueryData([key], timestamp)
-      glbWatcherClient.resetQueries({ queryKey: [key] })
+      setGlbVersion(key)
     }
 
     ws.onerror = (error) => console.error('WebSocket error:', error)
