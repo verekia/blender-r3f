@@ -21,3 +21,5 @@ The `watcher.ts` server:
 ## Customizing it
 
 This is just a proof of concept to serve as a base, you will want to customize a few things. For example you might not want all objects to end up as GLB files, so you'll need to tweak the export script to have some rules about which objects should be exported (you could use the renderable property of objects, or anything else).
+
+You'll probably want to add Draco compression in the export script or `gltf-transform` processing after the Blender export.
