@@ -1,0 +1,21 @@
+{
+  "name": "blender-r3f",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "next": "15.5.3"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2",
+    "@types/node": "24.3.3",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9"
+  }
+}

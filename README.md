@@ -1,1 +1,1 @@
-# blender-r3f
+# Blender to React Three Fiber (R3F) Workflow
